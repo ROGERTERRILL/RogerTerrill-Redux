@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  tech: "Redux3"
+  tech: "Redux"
 };
 export default (state = INITIAL_STATE, action) => {
   return state;
