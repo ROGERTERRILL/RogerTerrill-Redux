@@ -2,35 +2,38 @@ import React from "react";
 import "./styles.css";
 import { connect } from "react-redux";
 import { setTechnology } from "./actions";
-import { store } from "./store";
 
-function dispatchBtnAction(e) {
-  const tech = e.target.dataset.tech;
-  store.dispatch(setTechnology(tech));
-}
-
-const ButtonGroup = ({ technologies }) => (
+const ButtonGroup = ({ technologies, setTechnology }) => (
   <div>
-    {technologies.map((tech1, i) => (
+    {technologies.map((tech, i) => (
       <button
-        data-tech={tech1}
+        data-techy={tech}
         key={`btn-${i}`}
         className="hello-btn"
-        onClick={dispatchBtnAction}
+        onClick={setTechnology}
       >
-        {tech1}
+        {tech}
       </button>
     ))}
   </div>
 );
 
-// const mapStateToProps = state => {
-//   return {
-//     tech: state.breducer.tech
-//   };
-// };
+const mapStateToProps = state => {
+  return {
+    tech: state.breducer.tech
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setTechnology: e => {
+      const tech = e.target.dataset.techy;
+      dispatch(setTechnology(tech));
+    }
+  };
+};
 
 export default connect(
-  null,
-  { setTechnology }
+  mapStateToProps,
+  mapDispatchToProps
 )(ButtonGroup);
